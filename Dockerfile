@@ -1,6 +1,6 @@
 FROM node:latest
 
-RUN apt-get -y update && git clone https://github.com/sorenpeterson/dockerfun.git
+COPY test.js /test.js
 
-CMD node dockerfun/test.js
+CMD node test.js
 
