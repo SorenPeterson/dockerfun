@@ -1,4 +1,4 @@
 {
 	"name": "docker-api",
-	"main": "server.js",
+	"main": "server.js"
 }
