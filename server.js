@@ -20,10 +20,13 @@ var router = express.Router();              // get an instance of the express Ro
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/run', function(req, res) {
-	exec('docker run node ls', function(err, stdout, stderr) {
+	var decodedAlgo = new Buffer(req.param('algo'), 'base64').toString('utf-8');
+	decodedAlgo = decodedAlgo.replace(/\"/g, '\\"');
+	exec('docker run node node -e "' + decodedAlgo + '"', function(err, stdout, stderr) {
 		res.json({
 			results: stdout,
-			algo: req.param('algo')
+			errors: stderr,
+			algo: decodedAlgo
 		});
 	});
 });
